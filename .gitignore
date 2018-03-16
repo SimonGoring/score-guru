@@ -1,0 +1,5 @@
+*.Rproj
+token.txt
+config.json
+.Rproj.user
+.Rhistory

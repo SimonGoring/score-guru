@@ -29,12 +29,24 @@ client.on("message", (message) => {
       	  	
       	  	var ids = messages.map(id => id.id);
       	  	var usr = messages.map(usr => usr.author.username);
-      	  	var att = messages.map(att => att.attachments);
+      	  	var att = messages.map(function(att){
+      	  		var attach = att.attachments;
+      	  		var size = Object.keys(att).length;
+      	  		if(size>0) {
+      	  			attach = attach.map(att => att.url);
+      	  		} else {
+      	  			attach = '';
+      	  		}
+      	  		return attach;
+      	  	});
       	  	var timestamp = messages.map(id => id.createdTimestamp)
 
       	  	console.log(att);
 
       	  })
+      	  .catch(error => {
+    		assert.isNotOk(error,'Promise error');
+  		  });
       }
 
       /*let [lbclass, date, images] = args;

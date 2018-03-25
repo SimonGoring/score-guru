@@ -2,8 +2,9 @@ require('shelljs/global');
 const util = require('util');
 const fs = require('fs');
 const Discord = require("discord.js");
-const config = require("./config.json");
 
+const config = {token: process.env.TOKEN,
+                prefix: "%"};
 
 const client = new Discord.Client();
 
@@ -48,7 +49,8 @@ client.on("message", (message) => {
       var msg = [nexttime.slice(0, -1).join(', '), nexttime.slice(-1)[0]]
         .join(nexttime.length < 2 ? '' : ' and ')
       
-      message.channel.send("The next " + args[0] + " events will start in " + msg +". Each time will have a window of 1hr.");
+      message.channel.send("The next " + args[0] + 
+        " events will start in " + msg +". Each time with a window of 55m.");
 
       break;
     case "blah" :

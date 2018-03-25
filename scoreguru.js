@@ -1,6 +1,11 @@
+require('shelljs/global');
+const util = require('util');
+const fs = require('fs');
 const Discord = require("discord.js");
-const client = new Discord.Client();
 const config = require("./config.json");
+
+
+const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log("score-guru up and ready.");
@@ -12,50 +17,42 @@ client.on("message", (message) => {
   const command = args.shift().toLowerCase();
 
   switch (command) {
-    case "collect" :
-      /* this actually collects the images 
-         The section needs to do the following:
-         1. Ensure that messages have been posted
-         2. Find a message that was posted by the bot indicating the start
-         3. Check that the number of images matches. 
-         4. Record the URL of images returned. */
-      if(args[0] === 'start') {
-      	message.channel.send(`Waiting for you to upload your images (max 15).  Use the \`collect\` command again to register the images.`);
-      } else if(args.length == 3) {
-      	message.channel.fetchMessages({limit:15})
-      	  .then(function(messages){
-      	  	
-      	  	/* bot is a parameter that is true/false */
-      	  	
-      	  	var ids = messages.map(id => id.id);
-      	  	var usr = messages.map(usr => usr.author.username);
-      	  	var att = messages.map(function(att){
-      	  		var attach = att.attachments;
-      	  		var size = Object.keys(att).length;
-      	  		if(size>0) {
-      	  			attach = attach.map(att => att.url);
-      	  		} else {
-      	  			attach = '';
-      	  		}
-      	  		return attach;
-      	  	});
-      	  	var timestamp = messages.map(id => id.createdTimestamp)
+    case "quest-timer" :
 
-      	  	console.log(att);
+      timeb = {"timer": [{"event":"Troop",        "time": "March 22, 2018 21:05:01 PDT"},
+                         {"event":"Monster",      "time": "March 22, 2018 22:05:01 PDT"},
+                         {"event":"Construction", "time": "March 22, 2018 23:05:01 PDT"},
+                         {"event":"Troop",        "time": "March 22, 2018 00:05:01 PDT"},
+                         {"event":"Monster",      "time": "March 23, 2018 01:05:01 PDT"},
+                         {"event":"Resource",     "time": "March 23, 2018 02:05:01 PDT"},
+                         {"event":"Research",     "time": "March 23, 2018 03:05:01 PDT"},
+                         {"event":"Troop",        "time": "March 23, 2018 04:05:01 PDT"},
+                         {"event":"Monster",      "time": "March 23, 2018 05:05:01 PDT"},
+                         {"event":"Might",        "time": "March 23, 2018 06:05:01 PDT"},
+                         {"event":"Resource",     "time": "March 23, 2018 07:05:01 PDT"}
+                        ]};
 
-      	  })
-      	  .catch(error => {
-    		assert.isNotOk(error,'Promise error');
-  		  });
-      }
+      var timen = new Date();
 
-      /*let [lbclass, date, images] = args;
-      message.channel.fetchMessages({ limit: 10 })
-        .then(messages => console.log(`Received ${messages.size} messages`))
-        .catch(console.error); */
+      var next = timeb['timer'].filter(x => x['event'] === args[0] );
+      //var next = timeb['timer'].filter(x => x['event'] === "Monster" );
+      var times = next.map(date => new Date(date["time"]));
+
+      var nt = times.map(nexter => 11 - (Math.abs(timen - nexter) / 36e5) % 11 + 1);
+
+      var nexttime = [].concat.apply([], nt.map(x => [x, x + 11, x + 22]))
+        .sort(function(a,b) {return a - b; })
+        .filter(x => x < 24)
+        .map(x => Math.floor(x) + 'h' + Math.floor(x % 1 * 60) + 'm');
+
+      var msg = [nexttime.slice(0, -1).join(', '), nexttime.slice(-1)[0]]
+        .join(nexttime.length < 2 ? '' : ' and ')
+      
+      message.channel.send("The next " + args[0] + " events will start in " + msg +". Each time will have a window of 1hr.");
+
       break;
     case "blah" :
-      message.channel.send('Ooooh, looks like you\'re starting something exciting!');
+      message.channel.send('I feel like that some days too :)');
       break;
   }
 

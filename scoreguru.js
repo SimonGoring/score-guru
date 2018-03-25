@@ -8,8 +8,7 @@ const token = process.env.TOKEN;
 const config = {"token": token,
                 "prefix": "%"};
 
-const client = new Discord.Client()
-   .catch(err => console.log(err));
+const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log("score-guru up and ready.");
@@ -64,5 +63,4 @@ client.on("message", (message) => {
 
 });
 
-client.login(config["token"])
-  .catch(err => console.log(err));
+client.login(config["token"]);

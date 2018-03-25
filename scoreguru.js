@@ -3,6 +3,7 @@ const util = require('util');
 const fs = require('fs');
 const Discord = require("discord.js");
 
+//const config = require('./config.json')
 const config = {token: process.env.TOKEN,
                 prefix: "%"};
 
@@ -44,7 +45,7 @@ client.on("message", (message) => {
       var nexttime = [].concat.apply([], nt.map(x => [x, x + 11, x + 22]))
         .sort(function(a,b) {return a - b; })
         .filter(x => x < 24)
-        .map(x => Math.floor(x) + 'h' + Math.floor(x % 1 * 60) + 'm');
+        .map(x => Math.floor(x) + 'h' + Math.ceil(x % 1 * 60) + 'm');
 
       var msg = [nexttime.slice(0, -1).join(', '), nexttime.slice(-1)[0]]
         .join(nexttime.length < 2 ? '' : ' and ')

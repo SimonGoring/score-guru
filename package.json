@@ -7,6 +7,7 @@
   "description": "Manager for KoH Discord Channel in JavaScript.",
   "main": "scoreguru.js",
   "scripts": {
+    "start":"node scoreguru.js",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {

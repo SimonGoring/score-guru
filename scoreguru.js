@@ -12,7 +12,7 @@ const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log("score-guru up and ready.");
-  message.channel.send("Score Guru is running now.");
+  client.setStatus('online', 'Awaiting your command.');;
 });
 
 client.on("message", (message) => {

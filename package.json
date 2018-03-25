@@ -15,7 +15,7 @@
     "url": "git+https://ringbailwanton:5a5238621a175026bd5fb0cfb01b29278b7a0a8b@github.com/ringbailwanton/score-guru.git"
   },
   "keywords": [
-    "discord",
+    "discord.js",
     "node",
     "javascript",
     "heckfire"

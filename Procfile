@@ -1,1 +1,1 @@
-worker: node scoreguru.js
+worker: npm start

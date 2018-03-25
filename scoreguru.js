@@ -1,4 +1,3 @@
-require('shelljs/global');
 const util = require('util');
 const fs = require('fs');
 const Discord = require("discord.js");

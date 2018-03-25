@@ -3,14 +3,17 @@ const util = require('util');
 const fs = require('fs');
 const Discord = require("discord.js");
 
+const token = process.env.TOKEN;
+
 //const config = require('./config.json')
-const config = {token: process.env.TOKEN,
-                prefix: "%"};
+const config = {"token": token,
+                "prefix": "%"};
 
 const client = new Discord.Client();
 
 client.on("ready", () => {
   console.log("score-guru up and ready.");
+  message.channel.send("Score Guru is running now.");
 });
 
 client.on("message", (message) => {

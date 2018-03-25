@@ -4,6 +4,8 @@ config.json
 .Rproj.user
 .Rhistory
 
+.env
+
 # Logs
 logs
 *.log

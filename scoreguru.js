@@ -11,8 +11,7 @@ const config = {"token": token,
 const client = new Discord.Client();
 
 client.on("ready", () => {
-  console.log("score-guru up and ready.");
-  client.setStatus('online', 'Awaiting your command.');;
+  // client.setStatus('online', 'Awaiting your command.');;
 });
 
 client.on("message", (message) => {
